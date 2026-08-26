@@ -1,0 +1,44 @@
+/* Reset margin & padding dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Container utama Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Memisah logo ke kiri & menu ke kanan */
+  align-items: center;
+  background-color: #1e293b;     /* Warna background gelap murni */
+  padding: 15px 40px;
+}
+
+/* Styling Logo */
+.logo {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Styling List Menu */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;                      /* Jarak antar menu */
+}
+
+/* Styling Link Menu */
+.nav-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+/* Efek Hover (saat kursor di atas menu) */
+.nav-links a:hover {
+  color: #38bdf8;                 /* Warna biru muda */
+}
