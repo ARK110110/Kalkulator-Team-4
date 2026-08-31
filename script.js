@@ -7,16 +7,16 @@ let operation = undefined;
 let shouldResetScreen = false;
 
 function appendNumber(number) {
+    if (number === '.' && currentOperand.includes('.')) return;
+
     if (currentOperand === '0' && number !== '.') {
         currentOperand = number;
         updateDisplay();
         return;
     }
 
-    if (number === '.' && currentOperand.includes('.')) return;
-
     if (shouldResetScreen) {
-        currentOperand = number;
+        currentOperand = number === '.' ? '0.' : number;
         shouldResetScreen = false;
     } else {
         currentOperand += number;
@@ -26,7 +26,15 @@ function appendNumber(number) {
 }
 
 function appendOperation(op) {
-    if (currentOperand === '') return;
+    if (currentOperand === '' && previousOperand === '') return;
+
+    if (currentOperand === '') {
+        // lagi ganti operator sebelum ngetik angka baru
+        operation = op;
+        updateDisplay();
+        return;
+    }
+
     if (previousOperand !== '') {
         compute();
     }
@@ -34,6 +42,7 @@ function appendOperation(op) {
     operation = op;
     previousOperand = currentOperand;
     currentOperand = '';
+    shouldResetScreen = false;
     updateDisplay();
 }
 
@@ -56,8 +65,11 @@ function compute() {
             break;
         case '/':
             if (current === 0) {
-                alert("Tidak dapat membagi dengan nol!");
-                clearDisplay();
+                currentOperand = 'Error';
+                previousOperand = '';
+                operation = undefined;
+                shouldResetScreen = true;
+                updateDisplay();
                 return;
             }
             computation = prev / current;
@@ -65,7 +77,9 @@ function compute() {
         default:
             return;
     }
-    currentOperand = Math.round(computation * 1e10) / 1e10;
+
+    // FIX: dijadiin string, biar .includes('.') di appendNumber gak error
+    currentOperand = (Math.round(computation * 1e10) / 1e10).toString();
     operation = undefined;
     previousOperand = '';
     shouldResetScreen = true;
@@ -82,12 +96,15 @@ function clearDisplay() {
 }
 
 function deleteDigit() {
-    if (shouldResetScreen) return;
-    
+    if (shouldResetScreen || currentOperand === 'Error') {
+        clearDisplay();
+        return;
+    }
+
     if (currentOperand.length === 1 || currentOperand === '0') {
         currentOperand = '0';
     } else {
-        currentOperand = currentOperand.toString().slice(0, -1);
+        currentOperand = currentOperand.slice(0, -1);
     }
 
     updateDisplay();
@@ -106,3 +123,12 @@ function updateDisplay() {
         previousOperandElement.innerText = '';
     }
 }
+
+document.addEventListener('keydown', (e) => {
+    if (e.key >= '0' && e.key <= '9') appendNumber(e.key);
+    else if (e.key === '.') appendNumber('.');
+    else if (['+', '-', '*', '/'].includes(e.key)) appendOperation(e.key);
+    else if (e.key === 'Enter' || e.key === '=') { e.preventDefault(); compute(); }
+    else if (e.key === 'Backspace') deleteDigit();
+    else if (e.key === 'Escape') clearDisplay();
+});
