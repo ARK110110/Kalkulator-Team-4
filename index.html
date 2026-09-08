@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator Desktop Tailwind</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Desktop Tailwind</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-slate-900 flex items-center justify-center h-screen select-none">
+<body>
 
-    <!-- Container Kalkulator Desktop -->
-    <div class="bg-slate-800 p-6 rounded-2xl shadow-2xl w-80 border border-slate-700">
+  <!-- Tailwind CSS CDN -->
+</head>
+<body class="bg-slate-900 flex flex-col h-screen">
+  
+  <nav class="navbar flex flex-col">
+    <!-- Logo / Nama Website -->
+    <a href="#" class="logo">WebSaya</a>
+  
+    <!-- Menu Navigasi -->
+    <ul class="nav-links">
+      <li><a href="#">Beranda</a></li>
+      <li><a href="#">Tentang</a></li>
+      <li><a href="#">Layanan</a></li>
+      <li><a href="#">Kontak</a></li>
+    </ul>
+  </nav>
+  <!-- Container Kalkulator Desktop -->
+   <div class="w-screen flex flex-row justify-center h-screen items-center">
+  <div class="justify-center bg-slate-800 p-6 rounded-2xl shadow-2xl w-80 border border-slate-700">
         
         <!-- Layar Kalkulator -->
         <div class="mb-5 bg-slate-950 p-4 rounded-xl text-right border border-slate-800">
@@ -49,6 +66,7 @@
             <button onclick="compute()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-medium py-3 rounded-xl transition active:scale-95">=</button>
         </div>
 
+    </div>
     </div>
 
     <!-- Menghubungkan File JavaScript -->
