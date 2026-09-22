@@ -14,3 +14,4 @@ Turangga Dimas          : Frontend & UI/UX
 Rizki Ramadhan Ahsandi  : Backend
 
 Muhammad Rafi Pratama   : QA Tester
+<img width="1905" height="993" alt="image" src="https://github.com/user-attachments/assets/f601ae23-a89f-41b1-88ee-2cb67c49cef4" />
